@@ -50,3 +50,8 @@ class CriterionOhemDSN(nn.Module):
         loss2 = self.criterion2(scale_pred, target)
 
         return loss1 + loss2*0.4
+"""分割任务损失（示例）：DSN 与 OHEM 变体
+
+说明
+- 该文件包含两种双支路损失（主输出 + 辅助输出），并提供 OHEM 版本
+"""

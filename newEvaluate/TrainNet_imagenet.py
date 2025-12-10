@@ -91,6 +91,7 @@ class TrainNet():
                 param_group['lr'] = self.lr
     
     def initialize_weight(self,net):
+        """初始化 Conv/BN/Linear 权重（Xavier/常数/正态）"""
         for m in net.modules():
             if isinstance(m,nn.Conv2d):
                 t.nn.init.xavier_normal_(m.weight.data)
@@ -124,6 +125,7 @@ class TrainNet():
             shutil.copyfile(filename, 'model_best.pth.tar')
     
     def train(self,individual,train_loader=None,test_loader=None):
+        """执行训练与周期性验证，并将最佳指标写入日志与个体"""
         data_loader=Evolve_DataLoader(self.dataset,False)
         train_loader,test_loader=data_loader.data_loader()
         net=ConstructNet(individual,self.num_classes)
@@ -248,3 +250,9 @@ if __name__=="__main__":
         print(indi)
         trainnet=TrainNet(params,log)
         trainnet.train(indi)    
+"""ImageNet 训练器
+
+职责
+- 构建模型与优化器，执行若干 epoch 的训练与验证
+- 打印 epoch 级/批次级统计，记录最佳 Top-1/Top-5
+"""

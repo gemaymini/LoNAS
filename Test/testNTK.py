@@ -91,3 +91,4 @@ if __name__=="__main__":
     #         print(unit)
     #     cal_indi_parameters_and_flops(indi)
     #     print(indi)
+"""NTK 评估测试脚本（CIFAR）"""

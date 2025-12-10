@@ -142,3 +142,4 @@ if __name__=="__main__":
             print(unit)
         trainnet.train(indi)
     
+"""CIFAR 训练器（测试用）：按给定个体训练并验证"""

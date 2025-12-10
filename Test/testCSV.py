@@ -21,3 +21,8 @@ def generateCSV():
 
 if __name__=="__main__":
     generateCSV()
+"""训练结果汇总为 CSV 的脚本
+
+说明
+- 从 `trained_indis/` 读取已训练个体，按 NTK 排序，输出关键信息到 CSV
+"""

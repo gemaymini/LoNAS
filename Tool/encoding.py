@@ -249,3 +249,8 @@ def patch_replication_callback(data_parallel):
         return modules
 
     data_parallel.replicate = new_replicate
+"""多 GPU 上的并行封装（来自 encoding 库的适配）
+
+说明
+- DataParallelModel 与 DataParallelCriterion 的变体，支持在多个 GPU 上分布式计算损失
+"""

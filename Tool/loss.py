@@ -91,3 +91,4 @@ class OhemCrossEntropy2d(nn.Module):
         input_prob = F.softmax(predict, 1)
         target = self.generate_new_target(input_prob, target)
         return self.criterion(predict, target)
+"""OHEM CrossEntropy2d 的实现（用于像素级任务）"""

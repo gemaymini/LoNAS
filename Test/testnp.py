@@ -20,3 +20,4 @@ if __name__=="__main__":
     # print(l)
     # a=[False,False,True,True]
     # print(sum(a))
+"""Numpy 随机选择与概率分布的简单测试脚本"""

@@ -50,4 +50,14 @@ class RandomErasing(object):
                 return img
 
         return img
+"""Random Erasing 数据增强
 
+参考
+- Zhong et al., Random Erasing in Data Augmentation
+
+参数
+- probability: 执行概率
+- sl/sh: 擦除面积的下/上界比例
+- r1: 纵横比下界
+- mean: 擦除区域填充值（按通道）
+"""

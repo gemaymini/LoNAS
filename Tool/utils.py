@@ -129,11 +129,16 @@ def format_time(seconds):
 
 
 def cal_indi_parameters_and_flops(indi):
-    """计算个体的参数量和FLOPs
-    """
+    """计算并写入个体的参数量与 FLOPs（使用 thop.profile）"""
     net=ConstructNet(indi,1000)
     inputs=torch.randn(1,3,224,224)
     flops,params=profile(net,(inputs,),verbose=False)
     indi.parameters=params
     indi.flops=flops
+"""通用工具集
 
+内容
+- 数据均值方差计算、权重初始化
+- 文本进度条打印
+- FLOPs/参数量统计（基于 thop）
+"""

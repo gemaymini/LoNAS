@@ -34,6 +34,7 @@ class TrainNet():
             param_group["lr"]=lr
     
     def initialize_weight(self,net):
+        """初始化网络权重（Conv/BN/Linear）"""
         for m in net.modules():
             if isinstance(m,nn.Conv2d):
                 t.nn.init.xavier_normal_(m.weight.data)
@@ -47,6 +48,7 @@ class TrainNet():
                 m.bias.data.zero_()
     
     def train(self,individual):
+        """执行训练与周期性验证，并在长时间不提升时进行早停计数"""
         data_loader=Evolve_DataLoader(self.dataset,False)
         train_loader,test_loader=data_loader.data_loader()
         net=ConstructNet(individual,self.num_classes)
@@ -145,3 +147,4 @@ if __name__=="__main__":
         for unit in indi.units[1:]:
             print(unit)
         trainnet.train(indi)
+"""CIFAR 训练器（线性调 LR，含早停计数）"""

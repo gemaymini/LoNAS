@@ -23,12 +23,7 @@ PATH="/home/zzh/Projects/Dataset/"
 # 进化过程中使用的DataLoader
 class Evolve_DataLoader():
     def __init__(self,type,ntk):
-        """设置数据集
-
-        Args:
-            type (int): 1表示cifar10,2表示cifar100
-            ntk (bool): True表示使用ntk的batch_size,False表示使用acc的batch_size
-        """
+        """设置数据集基础信息与 batch 大小"""
         self.type=type
         self.dataset_path=PATH+"cifar10" if self.type==1 else PATH+"cifar100"
         self.length=16 if self.type==1 else 8
@@ -36,6 +31,7 @@ class Evolve_DataLoader():
         self.batch_size=params["ntk_batch_size"] if ntk else params["acc_batch_size"]
     
     def data_process(self):
+        """构建训练与验证的变换流水线（含 Cutout）"""
         transform_train=transforms.Compose([
             transforms.RandomCrop(32,padding=4),
             transforms.RandomHorizontalFlip(),
@@ -52,6 +48,7 @@ class Evolve_DataLoader():
 
 
     def data_loader(self):
+        """返回 CIFAR10/100 的训练与验证 DataLoader"""
         transform_train,transform_test=self.data_process()
         if self.type==1:
             train_data=torchvision.datasets.CIFAR10(root=self.dataset_path,train=True,download=False,transform=transform_train)
@@ -69,3 +66,13 @@ if __name__=="__main__":
     train_loader,test_loader=dataLoader.data_loader()
     print(len(train_loader))
     print(len(test_loader))
+"""CIFAR 数据加载与增强（Cutout 版本）
+
+模式
+- ntk=True: 使用较小的 `ntk_batch_size` 以快速评估 NTK
+- ntk=False: 使用 `acc_batch_size` 训练与验证
+
+增强
+- 训练：RandomCrop(32, padding=4) + HorizontalFlip + Normalize + Cutout
+- 验证：Normalize
+"""

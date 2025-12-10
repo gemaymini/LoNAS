@@ -22,8 +22,7 @@ else:
 
 dataset_type=params["dataset"]
 class EvaluateIndi():
-    """评估个体（包括评估NTK以及acc）
-    """
+    """评估个体（包括评估 NTK 以及 ACC）"""
     def __init__(self,log):
         self.log=log
         self.train_loader,self.valid_loader=Evolve_DataLoader(dataset_type,True).data_loader()
@@ -32,9 +31,8 @@ class EvaluateIndi():
         self.trainnet=TrainNet(params,self.log)
 
     def evaluate_indi_by_ntk(self,indi):
+        """计算个体的 NTK 条件数，并写入到个体对象"""
         cal_indi_parameters_and_flops(indi)
-        """评估个体的适应度（ntk）
-        """
         #TODO 降低ntk的波动
         device_ids = [0, 1]
         num_classes=1000
@@ -55,10 +53,15 @@ class EvaluateIndi():
 
 
     def evaluate_indi_by_acc(self,indi):
+        """训练并记录个体的最佳 ACC（实际由 TrainNet 写入个体）"""
         cal_indi_parameters_and_flops(indi)
-        """评估个体的精度（acc）
-        """
         self.trainnet.train(indi,self.train_loader,self.valid_loader)
         self.log.info(indi)
 
     
+"""个体评估：NTK 条件数与训练准确率
+
+说明
+- evaluate_indi_by_ntk: 构建网络并用少量 batch 计算 NTK 条件数，作为适应度
+- evaluate_indi_by_acc: 按配置训练若干 epoch，记录最佳 Top-1（或精度）
+"""

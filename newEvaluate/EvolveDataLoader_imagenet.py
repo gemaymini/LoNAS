@@ -24,11 +24,11 @@ PATH="/home/cv_dataset/"
 # 进化过程中使用的DataLoader
 class Evolve_DataLoader():
     def __init__(self,type,ntk):
-        """设置数据集
+        """设置数据集路径与 batch 大小
 
         Args:
-            type (int): 1表示cifar10,2表示cifar100
-            ntk (bool): True表示使用ntk的batch_size,False表示使用acc的batch_size
+            type: 数据集类型（此处 ImageNet 固定使用 `ImageFolder`）
+            ntk: 是否为 NTK 模式（决定 batch 大小）
         """
         self.type=type
         self.dataset_path=PATH+"ImageNet"
@@ -37,6 +37,7 @@ class Evolve_DataLoader():
         self.batch_size=params["ntk_batch_size"] if ntk else params["acc_batch_size"]
     
     def data_process(self):
+        """构建训练与验证的变换流水线"""
         transform_train=transforms.Compose([
             transforms.RandomResizedCrop(224),
             transforms.RandomHorizontalFlip(),
@@ -56,6 +57,7 @@ class Evolve_DataLoader():
 
 
     def data_loader(self):
+        """返回训练与验证 DataLoader（使用 ImageFolder）"""
         transform_train,transform_test=self.data_process()
         train_data=torchvision.datasets.ImageFolder(root=os.path.join(self.dataset_path,"train"),transform=transform_train)
         valid_data=torchvision.datasets.ImageFolder(root=os.path.join(self.dataset_path,"val"),transform=transform_test)
@@ -72,3 +74,13 @@ if __name__=="__main__":
     train_loader,test_loader=dataLoader.data_loader()
     print(len(train_loader))
     print(len(test_loader))
+"""ImageNet 数据加载与增强（用于进化评估与训练）
+
+模式
+- ntk=True: 使用较小的 `ntk_batch_size` 以快速计算 NTK
+- ntk=False: 使用 `acc_batch_size` 进行训练与验证
+
+增强
+- 训练：RandomResizedCrop(224) + HorizontalFlip + Normalize + RandomErasing
+- 验证：Resize(256) + CenterCrop(224) + Normalize
+"""

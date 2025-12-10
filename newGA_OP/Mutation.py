@@ -21,12 +21,12 @@ else:
 
 class Mutation():
     def __init__(self,log,indis,gen_epoch):
-        """变异操作
+        """变异操作控制器
 
         Args:
-            log (Log): 记录变异操作
-            indis (list[Individual]): 种群中的个体
-            gen_epochs (int): 当前进化的代次
+            log: 日志器
+            indis: 种群中的个体列表（引用）
+            gen_epoch: 当前代次（1-based）
         """
         self.log=log
         self.indis=indis
@@ -38,8 +38,7 @@ class Mutation():
         self.evaluateIndi=EvaluateIndi(self.log)
 
     def process(self):
-        """执行变异
-        """
+        """执行一代的选择-变异-合并-淘汰"""
         # 如果是前gen_division1代基于适应度删除，个体更换的个数为3，gen_division1~gen_division2代次之间则基于寿命删除，个体更换的个数为1，gen_division2代次之后有事基于ntk删除，个体更换的个数为3，实现先区分年龄，然后增加多样性（探索），然后逐步收敛（开发）的搜索过程
         if self.gen_epoch>self.gen_division1:
             self.t=params["spantime_t"]
@@ -59,7 +58,7 @@ class Mutation():
         domutation=doMutation(t_selected_inids,self.log)
         self.offsprings=domutation.do_mutation()
 
-        # 重新计算变异个体的unit的block数量、senet数量、参数量和FLOPs，同时计算适应度
+        # 重新计算变异个体的结构统计与适应度（NTK）
         for offspring in self.offsprings:
             offspring.cal_conv_length_and_senet()
             self.evaluateIndi.evaluate_indi_by_ntk(offspring)
@@ -76,7 +75,7 @@ class Mutation():
             indi.id="%02d%02d"%(self.gen_epoch,indi_id)
             indi_id+=1
         
-        # 5.删除后t个最差的个体，前gen_division1和gen_division2~max_gen代基于适应度删除，后面的代次则基于寿命删除
+        # 5.删除后 t 个最差的个体（分期策略：前/后期按 NTK，中期按寿命）
         if self.gen_epoch<=self.gen_division1 or self.gen_epoch>self.gen_division2:
             self.indis.sort(key=lambda indi:indi.ntk)  
         else:
@@ -102,3 +101,10 @@ if __name__=="__main__":
         indis.append(indi)
     mutation=Mutation(logger,indis,0)
     mutation.process()
+"""一代的变异与淘汰流程
+
+流程
+- 从当前种群随机选择 s 个体 → 取 NTK 最优的 t 个体 → 执行结构变异
+- 重新计算统计与 NTK，将子代加入并统一重编号
+- 按分期策略删除 t 个最差（前期/后期按 NTK，中期按寿命）
+"""

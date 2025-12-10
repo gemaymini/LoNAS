@@ -285,3 +285,8 @@ def infer(valid_queue, model, criterion):
 if __name__ == '__main__':
     for i in range(5):
         main()
+"""ImageNet 训练脚本示例
+
+说明
+- 使用保存的个体构建模型，配置训练与验证队列，运行若干 epoch 并保存 checkpoint
+"""

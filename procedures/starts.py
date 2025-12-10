@@ -39,3 +39,4 @@ def get_machine_info():
     else:
         info += "\nDoes not set CUDA_VISIBLE_DEVICES"
     return info
+"""运行时准备工具：种子与日志器、机器信息"""

@@ -14,6 +14,7 @@ else:
     params=Config.test_params
 
 def recal_bn(network, xloader, recalbn, device):
+    """可选：重置并用若干批次重估 BN 统计量以稳定评估"""
     for m in network.modules():
         if isinstance(m, torch.nn.BatchNorm2d):
             m.running_mean.data.fill_(0)
@@ -70,3 +71,9 @@ def get_ntk_n(xloader, networks, recalbn=0, train_mode=False, num_batch=-1):
         eigenvalues, _ = torch.symeig(ntk)  # ascending
         conds.append(np.nan_to_num((eigenvalues[-1] / eigenvalues[0]).item(), copy=True, nan=100000.0))
     return conds
+"""NTK 条件数计算
+
+定义
+- 对每个输入样本，收集网络所有可训练权重的梯度向量，构成样本-参数矩阵
+- 用样本梯度之间的 Gram 矩阵的谱条件数（最大特征值 / 最小特征值）作为网络的 NTK 估计
+"""

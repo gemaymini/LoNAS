@@ -23,6 +23,7 @@ class ConstructNet(nn.Module):
         self.fc=nn.Linear(self.units[-1].out_channel,self.num_classes)
 
     def _make_conv_sequential(self):
+        """将所有 ResNeXtUnit 转成顺序层组"""
         layer=[]
         firstConvUnit=self.units[0]
         for unit in self.units[1:]:
@@ -30,6 +31,7 @@ class ConstructNet(nn.Module):
         return nn.Sequential(*layer)
 
     def _make_resnext_layer(self,unit):
+        """构建单个 ResNeXtUnit 的层序列，首个 block 采用给定 stride"""
         strides=[unit.stride]+[1]*(unit.block_amount-1)
         layers=[]
         for index,stride in enumerate(strides):
@@ -60,3 +62,4 @@ if __name__=="__main__":
     net=ConstructNet(indi,10)
     print(net)
     output=net(input)
+"""构建含 Dropout 的网络（CIFAR 版）"""

@@ -39,3 +39,9 @@ class Log(object):
     @classmethod
     def warn(cls, _str):
         cls.__get_logger().warn(_str)
+"""统一日志模块
+
+说明
+- 创建文件与控制台双输出的 logger（单例）
+- 日志文件路径来自配置中的 `log_path/main.log`
+"""

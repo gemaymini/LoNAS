@@ -10,15 +10,13 @@ from newGA.FirstConvUnit import FirstConvUnit
 from newNetBlock.ResNeXtBlock import ResNeXtBlock
 from Tool.utils import cal_indi_parameters_and_flops
 class Individual():
-    """个体代表网络结构
-    """
+    """个体代表网络结构"""
     def __init__(self,params,indi_id):
         """初始化个体
 
         Args:
-            params (dict): 配置文件
-            indi_id (str): 个体编号
-            unit_length (int): 个体的长度
+            params: 配置参数字典
+            indi_id: 个体编号（字符串或整数）
         """
         self.id=indi_id #个体的编号
         self.ntk=-1.0 # 个体的NTK
@@ -47,37 +45,33 @@ class Individual():
         self.parameters=0 #个体的参数量
         self.flops=0 #个体的计算量
     def reset_ntk(self):
-        """重置个体的ntk
-        """
+        """重置个体的 NTK"""
         self.ntk=-1.0
     
     def reset_acc(self):
-        """重置个体的精度
-        """
+        """重置个体的精度"""
         self.acc=-1.0
 
     def reset(self):
-        """重置个体的spantime，ntk，acc
-        """
+        """重置个体的寿命与指标（spantime/ntk/acc）"""
         self.spantime=0
         self.ntk=-1.0
         self.acc=-1.0
 
     def init_first_conv_unit(self,unit_id,in_size=32,in_channel=3,out_channel=128):
-        """初始化位于网络首个位置的卷积单元
-        """
+        """初始化首个卷积单元"""
         self.unit_id+=1
         return FirstConvUnit(unit_id,in_size,in_channel,out_channel)
 
     def init_resnext_unit(self,unit_id,in_channel=128,stride=1):
-        """初始化resnext单元
+        """初始化 ResNeXt 单元
 
         Args:
-            unit_id (int, optional): 单元的编号. Defaults to self.unit_id.
-            in_channel (int, optional): 输入特征图的通道数. Defaults to 128.
-            stride (int, optional): unit的做卷积的卷积层的stride. Defaults to 1.
+            unit_id: 单元编号
+            in_channel: 输入通道
+            stride: 首个 block 的 stride（后续 block 为 1）
         Returns:
-            ResNeXtUnit: 返回ResNeXtUnit
+            ResNeXtUnit
         """
         self.unit_id+=1
         block_amount=np.random.randint(self.min_ResNeXt_amount,self.max_ResNeXt_amount+1) #unit中block的数量
@@ -97,8 +91,7 @@ class Individual():
         return ResNeXtUnit(unit_id,block_amount,in_channel,out_channel,cardinalitys,group_widths,hasSENets,stride)
             
     def initialize(self):
-        """初始化个体
-        """
+        """生成完整个体：首卷积 + 多个 ResNeXt 单元"""
         first_conv_unit=self.init_first_conv_unit(self.unit_id,self.in_size,self.image_channel,self.out_channel)
         self.units.append(first_conv_unit)
         in_channel=first_conv_unit.out_channel
@@ -117,16 +110,7 @@ class Individual():
     
 
     def get_cardinalitys_and_group_widths(self,cardinalitys,group_widths,block_amount):
-        """生成一个ResNeXtUnit中每个Block的cardinality和group_width的随机组合
-
-        Args:
-            cardinalitys (list): cardinality列表
-            group_widths (list): group_width列表
-            block_amount (int): ResNeXtUnit中Block的数量
-
-        Returns:
-            tuple: 返回随机生成的cardinality和group_width的列表
-        """
+        """生成一个 ResNeXtUnit 中每个 Block 的 `(cardinality, group_width)` 随机组合（受上下限约束）"""
         
         block_cardinalitys=[]
         block_group_widths=[]
@@ -153,8 +137,7 @@ class Individual():
         print("acc:{}".format(self.acc))
 
     def cal_conv_length_and_senet(self):
-        """计算个体的conv数量和senet数量
-        """
+        """统计个体的卷积层数量与 SENet 数量"""
         length=1
         senet=0
         for unit in self.units[1:]:
@@ -182,3 +165,10 @@ if __name__=="__main__":
         print(indi)
         # for unit in indi.units:
             # print(unit)
+"""个体定义：一条可搜索的网络结构
+
+说明
+- 个体由一个首卷积单元 + 若干 ResNeXt 单元构成
+- ResNeXt 单元内部包含多个 block，每个 block 具有 `(cardinality, group_width)` 配置，可能包含 SENet
+- 个体同时维护统计指标（NTK/ACC/寿命/参数量/FLOPs）与结构统计（conv 数量、SENet 数量）
+"""

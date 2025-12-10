@@ -32,8 +32,7 @@ class doMutation():
         self.cardinality_with_group_width_down_limit=params["cardinality_with_group_width_down_limit"] #cardinality*group_width的下限
 
     def add_block(self,indi,unit_pos,block_pos):
-        """在指定位置增加block,随机block的cardinality、group_width和hasSENet
-        """
+        """在指定位置插入一个新的 block（随机合法的 `(cardinality, group_width)` 与 hasSENet）"""
         self.log.info("进行add变异:")
         cardinality_index=np.random.choice(self.cpos)
         group_width_index=np.random.choice(self.gwpos)
@@ -64,8 +63,7 @@ class doMutation():
 
 
     def remove_block(self,indi,unit_pos,block_pos):
-        """在指定位置删除block
-        """
+        """删除指定位置的 block，并维护通道一致性"""
         self.log.info("进行remove变异:")
         cardinality=indi.units[unit_pos].cardinalitys.pop(block_pos)
         group_width=indi.units[unit_pos].group_widths.pop(block_pos)
@@ -82,8 +80,7 @@ class doMutation():
         indi.units[unit_pos].block_amount-=1
 
     def alter_block(self,indi,unit_pos,block_pos):
-        """在指定位置修改block参数
-        """
+        """修改指定位置的 block 参数（合法随机）与 SENet 标记，并维护通道一致性"""
         self.log.info("进行alter变异:")
         cardinality_index=np.random.choice(self.cpos)
         group_width_index=np.random.choice(self.gwpos)
@@ -111,10 +108,10 @@ class doMutation():
                 self.log.info("    修改下一个unit的in_channel:{}".format(indi.units[unit_pos+1].in_channel))
 
     def do_mutation(self):
-        """进行变异操作
+        """对备选 t 个体依次执行一次随机变异
 
         Returns:
-            offsprings list[Individuals]:返回生成的子代 
+            list[Individual]: 返回生成的子代（原地修改副本）
         """
         for index,offspring in enumerate(self.offsprings):
             self.log.info("个体{}开始变异".format(offspring.id))
@@ -192,3 +189,14 @@ class doMutation():
         while(old_unit_pos==new_pos):
             new_pos=np.random.randint(1,indi.unit_length)
         return new_pos
+"""结构变异操作集合
+
+提供三类原子变异：
+- add_block: 在指定 unit 的指定位置插入一个新的 ResNeXt block
+- remove_block: 删除一个现有 block
+- alter_block: 修改一个现有 block 的 `(cardinality, group_width)` 与 SENet 标记
+
+变异后的通道连贯性
+- 若修改/插入/删除的是 unit 的最后一个 block，则需重算该 unit 的 `out_channel`
+- 若该 unit 不是最后一个，则还需同步更新下一个 unit 的 `in_channel`
+"""

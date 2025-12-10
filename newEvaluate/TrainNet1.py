@@ -35,6 +35,7 @@ class TrainNet():
             param_group["lr"]=lr
     
     def initialize_weight(self,net):
+        """初始化网络权重（Conv/BN/Linear）"""
         for m in net.modules():
             if isinstance(m,nn.Conv2d):
                 t.nn.init.xavier_normal_(m.weight.data)
@@ -48,6 +49,7 @@ class TrainNet():
                 m.bias.data.zero_()
     
     def train(self,individual):
+        """执行训练与周期性验证，使用 Dropout 版本结构"""
         data_loader=Evolve_DataLoader(self.dataset,False)
         train_loader,test_loader=data_loader.data_loader()
         net=ConstructNet(individual,self.num_classes)
@@ -151,4 +153,4 @@ if __name__=="__main__":
             print(indi.parameters)
             f.write(str(indi.parameters)+"\n")
 
-
+"""CIFAR 训练器（Dropout 版本网络 + MultiStepLR 调度）"""
