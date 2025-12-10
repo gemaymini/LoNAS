@@ -1,0 +1,85 @@
+[个体]
+个体结构：个体由unit组成，个体的首个unit固定为FirstConvUnit来接收输入，之后的unit均为参数随机化的ResNeXtUnit（长度上限为max_unit_length）
+
+[Unit]
+FirstConvUnit(unit_id,in_size,in_channel,out_channel)：
+    unit说明：仅包含一个FirstConvBlock
+    参数设置
+    1.unit_id：unit的编号
+    2.in_size：输入图像的尺寸
+    3.in_channel：输入图像的通道数
+    4.out_channel：unit输出的通道数
+    以上参数均根据数据集来调整，而非随机生成
+
+ResNeXtUnit(unit_id,block_amount,in_channel,out_channel,cardinalitys,group_widths,hasSENets,stride)：
+    unit说明：一个unit包含多个ResNeXtBlock，每个block参数均随机生成，
+    参数设置
+    1.unit_id：unit的编号
+    2.block_amount：ResNeXtBlock的数量
+    3.unit：输入的通道数
+    4.out_channel：unit输出的通道数
+    5.cardinalitys：包含每个block的cardinality列表,cardinalitys[i]表示第i个block的cardinality
+    6.group_widths：包含每个block的group_width列表,group_widths[i]表示第i个block的group_width
+    7.hasSENets：包含每个block是否含有SENet的列表,hasSENets[i]表示第i个block是否含有SENet
+    8.stride：unit的卷积步长设置，每个unit保持一种步长设置
+
+[Block]
+FirstConvBlock(in_channel,out_channel)：
+    block说明：仅包含一层卷积操作
+    参数设置
+    1.in_channel：输入图像的通道数
+    2.out_channel：输出的通道数
+
+ResNeXtBlock(in_channel,cardinality,bottleneck_width,stride,hasSENet):
+    block说明：
+        group_width=cardinality*bottleneck_width
+        每个block包含3层卷积操作：
+        1.第一层为in_channel-->group_width的维度变化（1x1卷积）
+        2.第二层为group_width-->group_width的分组卷积操作（3x3卷积,groups=cardinality）
+        3.第三层为group_width-->expansion(=2)*group_width的维度变化（1x1卷积）
+        如果存在SENet，那么增加squeeze和excitation操作
+        最后加上直连通道的输出
+    参数设置
+    1.in_channel：输入特征的通道数
+    2.cardinality：block的cardinality
+    3.bottleneck_width：block的bottleneck_width
+    4.stride：分组卷积操作的卷积步长
+    5.hasSENet：block是否含有SENet
+
+**说明**：
+1.每个个体包含的ResNeXtUnit中，有且仅有两个unit的卷积步长为2，且这些unit中的第一个block设置为2，即保证一个个体只做两次池化操作
+2.每个个体的长度存在上限以及下限
+3.每个个体包含的SENet存在上限以及下限（涉及到参数量的问题）
+4.每个个体的ResNeXtUnit包含的ResNeXtBlock存在上限以及下限
+5.每个个体的ResNeXtBlock的cardinality和group_width存在上限以及下限（不能太少也不能太多）
+
+现存问题：
+#NOTE 1.个体长度界限的确定，长度=所有的ResNeXtBlock数量*3（三层卷积）+1，多少算合理，现阶段的最大长度为49
+#NOTE 2.cardinality和group_width的组合选择算法容易使得高维不易被选中，需要改进
+#NOTE 3.SENet数量界限的确定
+
+[算法整体流程]
+1.生成p个个体（初始种群），评估个体的适应度（ntk）
+2.执行进化：
+for gen in totaol_gen:
+    1).计算每个个体的寿命（spantime）
+    2).执行变异：
+        # 变异分为三个阶段：
+        # 1.第一次基于适应度评估阶段：在[1:gen_division1]进化轮次中，自然选择淘汰个体时，基于适应度来淘汰ntk_t个体（增加个体寿命的多样性，区分个体的寿命）
+        # 2.基于寿命评估阶段：在(gen_division1,gen_division2]进化轮次中，自然选择淘汰个体时，基于寿命淘汰spantime个体（增加种群的多样性，提高搜索空间中的探索能力（exploration））
+        # 3.第二次基于适应度评估阶段：在(gen_division2:total_gen]进化轮次中，自然选择淘汰个体时，基于适应度来淘汰ntk_t个体（收敛种群的多样性，提高搜索空间中的开发能力（exploitation））
+        a.随机选取s个父代个体
+        b.从这些s个父代个体中选取t个适应度最好的个体，复制新的一份作为变异个体
+        c.重置变异个体的spantime（新生个体，寿命为0）、ntk和acc
+        d.该t个个体执行变异
+            # 变异操作总共分为3类：add block，remove block和alter block，既可以修改个体的参数，也可以做到改变个体的长度，省去交叉操作 #NOTE 省去交叉操作可能带来[压缩搜索空间]的问题
+            a).随机选择变异的种类（等概率），随机选择个体发生变异的block位置（由unit位置和block位置共同确定：第unit_pos的unit上的第block_pos位置上的block）
+            # 注：add操作的block位置可以取到最后一个unit的block_amount+1的位置，即添加到最后的位置，remove和alter则不行
+            b.1).add：如果当前待增加的unit中的block数量已达到上限，则随机选择其他unit的block位置进行添加，如果均到达上限，则选择其他两种变异操作；增加的block的各参数随机生成
+            b.2).remove：如果当前待删除的unit中的block数量已达下限，则随机选择其他unit的block位置进行删除，如果均到达下限，则选择其他两种变异操作；删除指定位置上的block
+            b.3).alter：随机生成参数来修改指定位置上的block参数，（存在新的参数和就的参数相同的情况）
+            c).如果变异的位置发生在unit中的最后一个block，还需要修改unit的out_channel参数，如果unit不是最后一个unit，则还需要修改下一个unit的in_channel参数
+        e.评估该t个个体的适应度（ntk）,加入到原来的种群中（此时种群的个数为p+t个）
+        f.根据当前进化代次所属的阶段，按照不同的标准对种群进行升序排序，然后淘汰掉后t个个体（种群重新回到p个个体）#NOTE 存在问题：每次种群中的个体都是有序的，对后面的随机选取s个个体是否有影响
+    3).保存当前种群中的最优个体（ntk最小）
+3.个体训练：选取上述进化结束的种群中前k个最优的个体（ntk最小），进行训练，得到网络的精度（acc）

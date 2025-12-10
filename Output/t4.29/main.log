@@ -1,0 +1,18 @@
+2021-05-06 14:46:03,870 INFO    : [id:10008,unit_amount:4,conv_length:31,senet_amount:0,spantime:7,ntk:4.268,acc:95.58,params:2133322.0,FLOPs:1066658304.0]
+2021-05-06 14:46:08,050 INFO    : 个体10008开始训练
+2021-05-07 00:29:51,615 INFO    : Early Stopping with best_acc:95.33 and val_acc for this epoch:255
+2021-05-07 00:29:52,936 INFO    : 个体10008开始训练
+2021-05-07 10:45:58,233 INFO    : Early Stopping with best_acc:95.26 and val_acc for this epoch:257
+2021-05-07 10:45:59,565 INFO    : 个体10008开始训练
+2021-05-07 17:26:42,940 INFO    : Early Stopping with best_acc:95.21 and val_acc for this epoch:255
+2021-05-07 17:26:43,868 INFO    : 个体10008开始训练
+2021-05-07 22:10:21,172 INFO    : Early Stopping with best_acc:95.18 and val_acc for this epoch:255
+2021-05-07 22:10:22,108 INFO    : 个体10008开始训练
+2021-05-08 02:53:50,744 INFO    : Early Stopping with best_acc:95.2 and val_acc for this epoch:255
+2021-05-08 02:53:51,690 INFO    : 个体10008开始训练
+2021-05-08 07:37:25,383 INFO    : Early Stopping with best_acc:95.24 and val_acc for this epoch:255
+2021-05-08 07:37:26,308 INFO    : 个体10008开始训练
+2021-05-08 12:20:24,223 INFO    : Early Stopping with best_acc:95.43 and val_acc for this epoch:255
+2021-05-08 12:20:25,170 INFO    : 个体10008开始训练
+2021-05-08 17:05:14,833 INFO    : Early Stopping with best_acc:95.21 and val_acc for this epoch:255
+2021-05-08 17:05:15,762 INFO    : 个体10008开始训练

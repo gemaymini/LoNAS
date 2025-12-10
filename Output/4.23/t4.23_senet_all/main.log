@@ -1,0 +1,20 @@
+2021-04-30 10:03:21,403 INFO    : 个体5001开始训练
+2021-04-30 19:48:53,878 INFO    : Early Stopping with best_acc:95.04 and val_acc for this epoch:235
+2021-04-30 19:48:55,391 INFO    : 个体5002开始训练
+2021-05-01 08:17:20,445 INFO    : Early Stopping with best_acc:95.5 and val_acc for this epoch:237
+2021-05-01 08:17:21,896 INFO    : 个体5003开始训练
+2021-05-01 16:15:44,656 INFO    : Early Stopping with best_acc:95.19 and val_acc for this epoch:235
+2021-05-01 16:15:45,774 INFO    : 个体5004开始训练
+2021-05-01 18:18:45,257 INFO    : Early Stopping with best_acc:94.54 and val_acc for this epoch:235
+2021-05-01 18:18:46,373 INFO    : 个体5005开始训练
+2021-05-01 23:13:59,451 INFO    : Early Stopping with best_acc:95.21 and val_acc for this epoch:237
+2021-05-01 23:14:00,470 INFO    : 个体5006开始训练
+2021-05-02 02:54:29,336 INFO    : Early Stopping with best_acc:95.1 and val_acc for this epoch:235
+2021-05-02 02:54:30,383 INFO    : 个体5007开始训练
+2021-05-02 06:52:55,642 INFO    : Early Stopping with best_acc:94.55 and val_acc for this epoch:235
+2021-05-02 06:52:56,735 INFO    : 个体5008开始训练
+2021-05-02 11:01:29,852 INFO    : Early Stopping with best_acc:95.0 and val_acc for this epoch:247
+2021-05-02 11:01:30,865 INFO    : 个体5009开始训练
+2021-05-02 14:37:23,394 INFO    : Early Stopping with best_acc:95.02 and val_acc for this epoch:235
+2021-05-02 14:37:24,470 INFO    : 个体5010开始训练
+2021-05-02 18:23:13,551 INFO    : Early Stopping with best_acc:95.42 and val_acc for this epoch:235

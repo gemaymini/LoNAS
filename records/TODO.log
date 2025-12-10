@@ -1,0 +1,26 @@
+# todo-list
+
+#CHECK -1.设置epoch=300重新v4.21训练找到的个体
+#CHECK 0.计算个体的参数，计算量，变异后重新计算参数和计算量
+#TODO 1.记录实验的时间，测试生成的个体的ntk和acc的关联性强弱，如果弱，进行修正
+#CHECK 2.记录最后一代的所有个体，进行训练
+#CHECK 2.epochs增加到300，测试lr和earlystop的影响t4.23_1使用原来的，t4.23使用cosine,迟一点的是原来的
+#CHECK 4.23/t4.23_senet：训练v4.23最后一代前十个个体（去除SENet），验证SENet的作用
+#CHECK 4.23/t4.23_senet_all：训练v4.23最后一代前十个个体（全部加上SENet），验证SENet的作用
+#CHECK t4.27用来验证“ntk大精度低”
+#CHECK t4.29：重新训练10次v4.29中最好的个体:效果不好
+#TODO v4.23：重新训练10次v4.23中最好的个体（95.63）
+#TODO v5.20：cifar100训练
+#TODO 修改resnext block的结构：使用正确的网络结构：gw经过每个unit后需要乘以2，每个unit的中间卷积的输出为当前unit的gw*c，输出为当前unit的gw*4。比如c=8,gw=64:unit1:[64,8*64,64*4];unit2:[64*4,8*128,128*4];[128*4,8*256,256*4]
+
+
+
+
+
+
+# screen
+
+[3090]
+v429:v5.6_1+rs TrainNet.py
+dropout:v4.23+rs+dropout0.5 TrainNet1.py
+[2080]

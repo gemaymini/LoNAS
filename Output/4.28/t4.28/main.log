@@ -1,0 +1,9 @@
+2021-04-29 11:57:43,631 INFO    : 个体0127开始训练
+2021-04-29 11:59:16,514 INFO    : 个体5001开始训练
+2021-04-29 12:56:28,020 INFO    : Early Stopping with best_acc:92.73 and val_acc for this epoch:267
+2021-04-29 12:56:29,043 INFO    : 个体0115开始训练
+2021-04-29 14:10:56,286 INFO    : Early Stopping with best_acc:93.76 and val_acc for this epoch:255
+2021-04-29 14:10:57,308 INFO    : 个体0122开始训练
+2021-04-29 15:23:04,040 INFO    : Early Stopping with best_acc:93.63 and val_acc for this epoch:255
+2021-04-29 15:23:05,080 INFO    : 个体0131开始训练
+2021-04-29 16:20:25,709 INFO    : Early Stopping with best_acc:91.8 and val_acc for this epoch:255

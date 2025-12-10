@@ -1,0 +1,30 @@
+2021-04-28 23:29:12,042 INFO    : --------------------------------------------------[种群初始化]--------------------------------------------------
+
+2021-04-29 11:45:14,466 INFO    : 个体5001开始训练
+2021-04-29 11:59:53,504 INFO    : 个体5001开始训练
+2021-04-29 16:00:11,300 INFO    : Early Stopping with best_acc:95.06 and val_acc for this epoch:235
+2021-04-29 16:00:12,460 INFO    : 个体5002开始训练
+2021-04-29 21:05:51,492 INFO    : Early Stopping with best_acc:94.97 and val_acc for this epoch:235
+2021-04-29 21:05:52,537 INFO    : 个体5003开始训练
+2021-04-30 00:33:52,058 INFO    : Early Stopping with best_acc:95.03 and val_acc for this epoch:235
+2021-04-30 00:33:53,124 INFO    : 个体5004开始训练
+2021-04-30 02:17:51,753 INFO    : Early Stopping with best_acc:94.41 and val_acc for this epoch:235
+2021-04-30 02:17:52,890 INFO    : 个体5005开始训练
+2021-04-30 07:18:19,180 INFO    : Early Stopping with best_acc:95.37 and val_acc for this epoch:275
+2021-04-30 07:18:20,219 INFO    : 个体5006开始训练
+2021-04-30 10:55:46,625 INFO    : Early Stopping with best_acc:95.19 and val_acc for this epoch:239
+2021-04-30 10:55:47,943 INFO    : 个体5007开始训练
+2021-04-30 18:13:48,573 INFO    : Early Stopping with best_acc:94.83 and val_acc for this epoch:237
+2021-04-30 18:13:49,989 INFO    : 个体5008开始训练
+2021-05-01 02:41:55,546 INFO    : Early Stopping with best_acc:95.34 and val_acc for this epoch:275
+2021-05-01 02:41:56,963 INFO    : 个体5009开始训练
+2021-05-01 09:07:47,317 INFO    : Early Stopping with best_acc:94.85 and val_acc for this epoch:235
+2021-05-01 09:07:48,743 INFO    : 个体5010开始训练
+2021-05-01 15:47:47,499 INFO    : Early Stopping with best_acc:95.27 and val_acc for this epoch:235
+2021-05-08 22:38:04,615 INFO    : [id:5008,unit_amount:5,conv_length:40,senet_amount:9,spantime:18,ntk:4.321,acc:89.6,params:4079946.0,FLOPs:832341248.0]
+2021-05-08 22:38:46,968 INFO    : [id:5008,unit_amount:5,conv_length:40,senet_amount:9,spantime:18,ntk:4.321,acc:89.6,params:4079946.0,FLOPs:832341248.0]
+2021-05-08 22:39:29,523 INFO    : [id:5008,unit_amount:5,conv_length:40,senet_amount:9,spantime:18,ntk:4.321,acc:89.6,params:4079946.0,FLOPs:832341248.0]
+2021-05-08 22:39:36,210 INFO    : 个体5008开始训练
+2021-05-09 06:38:13,663 INFO    : Early Stopping with best_acc:95.11 and val_acc for this epoch:259
+2021-05-09 06:38:13,764 INFO    : [id:5008,unit_amount:5,conv_length:40,senet_amount:9,spantime:18,ntk:4.321,acc:89.6,params:4079946.0,FLOPs:832341248.0]
+2021-05-09 06:38:15,128 INFO    : 个体5008开始训练

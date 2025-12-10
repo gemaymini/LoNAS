@@ -1,0 +1,9 @@
+2021-04-27 21:23:49,419 INFO    : 个体0112开始训练
+2021-04-27 22:38:50,106 INFO    : Early Stopping with best_acc:90.09 and val_acc for this epoch:291
+2021-04-27 22:38:50,107 INFO    : 个体0112的适应度为acc：90.090%
+2021-04-27 22:38:51,290 INFO    : 个体0115开始训练
+2021-04-28 00:05:19,362 INFO    : Early Stopping with best_acc:92.44 and val_acc for this epoch:267
+2021-04-28 00:05:19,363 INFO    : 个体0115的适应度为acc：92.440%
+2021-04-28 00:05:20,460 INFO    : 个体0122开始训练
+2021-04-28 01:24:50,223 INFO    : Early Stopping with best_acc:90.71 and val_acc for this epoch:261
+2021-04-28 01:24:50,224 INFO    : 个体0122的适应度为acc：90.710%

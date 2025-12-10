@@ -1,0 +1,103 @@
+2022-02-15 22:06:15,575 INFO    : --------------------------------------------------[参数设置]--------------------------------------------------
+2022-02-15 22:06:15,576 INFO    : max_unit_length:5
+2022-02-15 22:06:15,576 INFO    : min_unit_length:3
+2022-02-15 22:06:15,576 INFO    : image_channel:3
+2022-02-15 22:06:15,576 INFO    : out_channel:64
+2022-02-15 22:06:15,576 INFO    : in_size:224
+2022-02-15 22:06:15,576 INFO    : max_total_SENet_amount:30
+2022-02-15 22:06:15,576 INFO    : min_total_SENet_amount:10
+2022-02-15 22:06:15,576 INFO    : max_ResNeXt_amount:4
+2022-02-15 22:06:15,576 INFO    : min_ResNeXt_amount:3
+2022-02-15 22:06:15,576 INFO    : cardinality:[2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 16, 16, 16, 16, 16, 32, 32, 32, 64, 64, 64]
+2022-02-15 22:06:15,576 INFO    : group_width:[4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 16, 16, 16, 16, 16, 32, 32, 32, 64, 64, 64]
+2022-02-15 22:06:15,576 INFO    : init_c_and_gw_index:-5
+2022-02-15 22:06:15,576 INFO    : cardinality_with_group_width_up_limit:1024
+2022-02-15 22:06:15,576 INFO    : cardinality_with_group_width_down_limit:64
+2022-02-15 22:06:15,577 INFO    : lr:0.1
+2022-02-15 22:06:15,577 INFO    : device:cuda:0
+2022-02-15 22:06:15,577 INFO    : evolve_epochs:300
+2022-02-15 22:06:15,577 INFO    : ntk_batch_size:32
+2022-02-15 22:06:15,577 INFO    : acc_batch_size:128
+2022-02-15 22:06:15,577 INFO    : retrain_epochs:300
+2022-02-15 22:06:15,577 INFO    : retrain_batch_size:128
+2022-02-15 22:06:15,577 INFO    : dataset:2
+2022-02-15 22:06:15,577 INFO    : train_top_k:10
+2022-02-15 22:06:15,577 INFO    : pop_size:4
+2022-02-15 22:06:15,577 INFO    : gen:5
+2022-02-15 22:06:15,577 INFO    : s:2
+2022-02-15 22:06:15,577 INFO    : ntk_t:1
+2022-02-15 22:06:15,577 INFO    : spantime_t:1
+2022-02-15 22:06:15,577 INFO    : gen_division1:2
+2022-02-15 22:06:15,577 INFO    : gen_division2:3
+2022-02-15 22:06:15,577 INFO    : log_path:../Output/v2.15
+2022-02-15 22:06:15,577 INFO    : init_cardinality:[2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 16, 16, 16, 16, 16, 32]
+2022-02-15 22:06:15,577 INFO    : init_group_width:[4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 16, 16, 16, 16, 16, 32]
+2022-02-15 22:06:15,577 INFO    : --------------------------------------------------[种群初始化]--------------------------------------------------
+
+2022-02-15 22:08:53,251 INFO    : 个体0101的适应度NTK为：74.074
+2022-02-15 22:08:53,253 INFO    : [id:0101,unit_amount:4,conv_length:37,senet_amount:10,spantime:0,ntk:74.074,acc:-1.0,params:1411376.0,FLOPs:12158854408.0]
+2022-02-15 22:23:33,992 INFO    : 
+2022-02-15 22:23:33,992 INFO    : another 10 runs
+2022-02-15 22:23:33,993 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 22:25:32,833 INFO    : 
+2022-02-15 22:25:32,833 INFO    : another 10 runs
+2022-02-15 22:25:32,833 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 22:25:44,474 INFO    : 个体5010开始训练
+2022-02-15 22:27:45,405 INFO    : 
+2022-02-15 22:27:45,405 INFO    : another 10 runs
+2022-02-15 22:27:45,406 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 22:27:57,899 INFO    : 个体5010开始训练
+2022-02-15 22:40:41,007 INFO    : 
+2022-02-15 22:40:41,007 INFO    : another 10 runs
+2022-02-15 22:40:41,008 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 22:40:51,441 INFO    : 个体5010开始训练
+2022-02-15 22:41:13,937 INFO    : 
+2022-02-15 22:41:13,937 INFO    : another 10 runs
+2022-02-15 22:41:13,938 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 22:41:28,727 INFO    : 个体5010开始训练
+2022-02-15 22:42:48,379 INFO    : 
+2022-02-15 22:42:48,379 INFO    : another 10 runs
+2022-02-15 22:42:48,379 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 22:43:00,790 INFO    : 个体5010开始训练
+2022-02-15 22:51:55,480 INFO    : 
+2022-02-15 22:51:55,480 INFO    : another 10 runs
+2022-02-15 22:51:55,480 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 22:52:07,795 INFO    : 个体5010开始训练
+2022-02-15 22:52:47,851 INFO    : 
+2022-02-15 22:52:47,851 INFO    : another 10 runs
+2022-02-15 22:52:47,851 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 22:53:00,955 INFO    : 个体5010开始训练
+2022-02-15 23:31:11,740 INFO    : 
+2022-02-15 23:31:11,741 INFO    : another 10 runs
+2022-02-15 23:31:11,741 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:31:22,986 INFO    : 个体5010开始训练
+2022-02-15 23:33:30,256 INFO    : 
+2022-02-15 23:33:30,257 INFO    : another 10 runs
+2022-02-15 23:33:30,257 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:33:39,659 INFO    : 个体5010开始训练
+2022-02-15 23:34:45,830 INFO    : 
+2022-02-15 23:34:45,830 INFO    : another 10 runs
+2022-02-15 23:34:45,831 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:34:59,936 INFO    : 个体5010开始训练
+2022-02-15 23:35:53,834 INFO    : 
+2022-02-15 23:35:53,835 INFO    : another 10 runs
+2022-02-15 23:35:53,835 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:36:03,897 INFO    : 个体5010开始训练
+2022-02-15 23:39:58,653 INFO    : 
+2022-02-15 23:39:58,653 INFO    : another 10 runs
+2022-02-15 23:39:58,653 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:40:08,820 INFO    : 个体5010开始训练
+2022-02-15 23:42:58,501 INFO    : 
+2022-02-15 23:42:58,501 INFO    : another 10 runs
+2022-02-15 23:42:58,501 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:43:08,883 INFO    : 个体5010开始训练
+2022-02-15 23:43:35,275 INFO    : v0215 best_acc1:0 and best_acc5:0 with re
+2022-02-15 23:43:35,454 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:43:41,838 INFO    : 个体5010开始训练
+2022-02-15 23:43:59,756 INFO    : v0215 best_acc1:0 and best_acc5:0 with re
+2022-02-15 23:43:59,936 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:44:06,451 INFO    : 个体5010开始训练
+2022-02-15 23:45:48,547 INFO    : 
+2022-02-15 23:45:48,547 INFO    : another 10 runs
+2022-02-15 23:45:48,548 INFO    : [id:5010,unit_amount:4,conv_length:37,senet_amount:7,spantime:5,ntk:4.41,acc:95.51,params:1957946.0,FLOPs:878447728.0]
+2022-02-15 23:45:58,492 INFO    : 个体5010开始训练
